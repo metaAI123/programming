@@ -1,5 +1,7 @@
 require('init-packer')
 require('keymap')
+require('LSP_config')
+require('nvim_cmp')
 --使用相对行号
 vim.wo.number = true
 vim.wo.relativenumber = true

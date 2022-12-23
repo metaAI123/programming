@@ -1,0 +1,16 @@
+oh-my-posh init pwsh | Invoke-Expression
+oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/jandedobbeleer.omp.json" | Invoke-Expression
+
+$internet_setting = Get-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings'
+if ($internet_setting.ProxyEnable -eq 1) {
+    $env:HTTP_PROXY = "http://$($internet_setting.ProxyServer)"
+    $env:HTTPS_PROXY = "http://$($internet_setting.ProxyServer)"
+    Write-Output "Proxy Enabled"
+}
+else{
+    Remove-Item Env:\HTTP_PROXY
+    Remove-Item Env:\HTTPS_PROXY
+    Write-Output "Proxy Disabled"
+}
+
+Remove-Variable -Name internet_setting
